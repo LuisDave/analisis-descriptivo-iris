@@ -17,10 +17,10 @@ El notebook transforma datos crudos en tablas, visualizaciones y conclusiones in
 │   ├── archive.zip                      # Descarga original del dataset
 │   └── database.sqlite                  # Base incluida en la descarga
 └── notebooks/
-    └── parte_1_estadistica_descriptiva_iris.ipynb
+    └── analisis_descriptivo_iris.ipynb
 ```
 
-El análisis está en `notebooks/parte_1_estadistica_descriptiva_iris.ipynb`.
+El análisis está en `notebooks/analisis_descriptivo_iris.ipynb`.
 
 ## Dataset y variable analizada
 
@@ -50,7 +50,7 @@ py -m pip install pandas numpy matplotlib scipy jupyter
 3. Abre el notebook:
 
    ```powershell
-   jupyter notebook notebooks\parte_1_estadistica_descriptiva_iris.ipynb
+   jupyter notebook notebooks\analisis_descriptivo_iris.ipynb
    ```
 
 4. En Jupyter, ejecuta todas las celdas con **Run All**.
