@@ -18,15 +18,13 @@ El resultado es un análisis reproducible con código, tablas, gráficas y expli
 ```text
 .
 ├── data/
-│   ├── Iris.csv                         # Fuente de datos utilizada
-│   ├── archive.zip                      # Descarga original del dataset
-│   └── database.sqlite                  # Base incluida en la descarga
+│   └── Iris.csv                         # Fuente de datos utilizada
 ├── notebooks/
 │   └── analisis_descriptivo_iris.ipynb  # Notebook principal
 └── README.md
 ```
 
-El único archivo de datos que utiliza el notebook es `data/Iris.csv`. El archivo `archive.zip` se conserva como respaldo de la descarga original.
+El notebook utiliza únicamente `data/Iris.csv`.
 
 ## Requisitos
 
