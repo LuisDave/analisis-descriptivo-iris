@@ -124,7 +124,7 @@ Al ejecutar correctamente el notebook, deberías observar:
 - 150 observaciones y cero valores faltantes en `PetalLengthCm`.
 - Longitudes entre 1.0 y 6.9 cm.
 - Ocho clases de frecuencia cuya suma es 150.
-- Dos gráficas principales: una figura con histograma, polígono y ojiva; y un diagrama de caja y bigote.
+- Cuatro gráficas independientes: histograma, polígono de frecuencias, ojiva y diagrama de caja y bigote.
 - Ningún valor atípico según la regla de Tukey aplicada en el análisis.
 
 ## Problemas frecuentes
