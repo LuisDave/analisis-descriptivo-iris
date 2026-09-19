@@ -4,3 +4,6 @@ __pycache__/
 .ipynb_checkpoints/
 data/archive.zip
 data/database.sqlite
+figuras/
+output/
+tmp/
