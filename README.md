@@ -1,52 +1,44 @@
-# Análisis descriptivo del dataset Iris
+# Análisis exploratorio: Iris y causas de falla
 
-Guía para ejecutar y comprender un análisis exploratorio de la longitud del pétalo en el dataset Iris.
+Este proyecto reúne dos análisis exploratorios independientes. Cada notebook tiene su propia fuente de datos, objetivo y visualizaciones.
 
-## Objetivo
+## Objetivos
 
-El notebook estudia la variable `PetalLengthCm` para responder preguntas básicas de análisis de datos:
+El proyecto permite responder dos grupos de preguntas:
 
-- ¿En qué intervalos se concentran las longitudes del pétalo?
-- ¿Cuál es el valor típico y cuánto varían las observaciones?
-- ¿Qué forma presenta la distribución?
-- ¿Existen valores atípicos?
+- **Dataset Iris:** cómo se distribuye la longitud del pétalo, cuál es su valor típico, cuánto varía y si presenta valores atípicos.
+- **Causas de falla:** qué problemas ocurren con mayor frecuencia y cuáles deben priorizarse para concentrar acciones de mejora.
 
-El resultado es un análisis reproducible con código, tablas, gráficas y explicaciones. Puede utilizarse como punto de partida para comparar especies o preparar modelos de clasificación.
-
-## Contenido del proyecto
+## Estructura
 
 ```text
 .
 ├── data/
-│   └── Iris.csv                         # Fuente de datos utilizada
+│   ├── Iris.csv                         # Mediciones de flores Iris
+│   └── causas_falla_frecuencias.csv     # Consolidado de 120 fallas operativas
 ├── notebooks/
-│   └── analisis_descriptivo_iris.ipynb  # Notebook principal
+│   ├── analisis_descriptivo_iris.ipynb  # Distribución de PetalLengthCm
+│   └── analisis_causas_falla.ipynb      # Pareto y distribución de fallas
 └── README.md
 ```
-
-El notebook utiliza únicamente `data/Iris.csv`.
 
 ## Requisitos
 
 - Python 3.10 o superior.
 - Jupyter Notebook o JupyterLab.
-- Librerías: `pandas`, `numpy`, `matplotlib` y `scipy`.
+- `pandas`, `numpy`, `matplotlib` y `scipy`.
 
-## Instalación del entorno
+## Instalación
 
-Elige **una** de las siguientes opciones. Si usas Anaconda y tu terminal muestra `(base)`, se recomienda la primera.
+Elige una opción. Si tu terminal muestra `(base)`, usa Anaconda.
 
-### Opción A: Anaconda
-
-En PowerShell, desde la carpeta del proyecto:
+### Con Anaconda
 
 ```powershell
 conda install scipy pandas numpy matplotlib jupyter -y
 ```
 
-### Opción B: entorno virtual de Python
-
-En PowerShell, desde la carpeta del proyecto:
+### Con un entorno virtual de Python
 
 ```powershell
 py -m venv .venv
@@ -54,93 +46,85 @@ py -m venv .venv
 py -m pip install pandas numpy matplotlib scipy jupyter
 ```
 
-## Abrir y ejecutar el notebook
+## Ejecutar los notebooks
 
 1. Abre PowerShell en la raíz del proyecto.
-2. Si elegiste un entorno virtual, actívalo:
+2. Si creaste un entorno virtual, actívalo:
 
    ```powershell
    .\.venv\Scripts\Activate.ps1
    ```
 
-3. Inicia Jupyter:
+3. Abre el análisis que necesitas:
 
    ```powershell
    jupyter notebook notebooks\analisis_descriptivo_iris.ipynb
    ```
 
-4. En el navegador, abre `analisis_descriptivo_iris.ipynb`.
-5. Selecciona **Kernel → Restart Kernel** si habías instalado librerías recientemente.
-6. Ejecuta todo con **Run All**.
+   O el análisis de fallas:
 
-Las tablas, gráficas e interpretaciones aparecerán debajo de las celdas correspondientes.
+   ```powershell
+   jupyter notebook notebooks\analisis_causas_falla.ipynb
+   ```
 
-## Si aparece `ModuleNotFoundError: No module named 'scipy'`
+4. En Jupyter, ejecuta todas las celdas con **Run All**.
 
-El error indica que el kernel activo no tiene instalada la librería. No es un error del notebook ni de los datos.
+Si instalaste librerías recientemente, selecciona **Kernel → Restart Kernel** antes de ejecutar el notebook.
 
-La solución más directa es ejecutar esta celda nueva dentro del notebook:
+## Si aparece `ModuleNotFoundError`
+
+El kernel activo no tiene instaladas las librerías requeridas. En una celda nueva del notebook ejecuta:
 
 ```python
 %pip install scipy pandas numpy matplotlib
 ```
 
-Cuando finalice:
+Después selecciona **Kernel → Restart Kernel** y ejecuta **Run All**.
 
-1. Selecciona **Kernel → Restart Kernel**.
-2. Ejecuta de nuevo **Run All**.
+## Notebook: análisis descriptivo de Iris
 
-También puedes instalar las librerías desde PowerShell con el comando de Anaconda o `pip` de la sección anterior. Es importante reiniciar Jupyter después de instalar paquetes para que el kernel detecte las nuevas versiones.
+Archivo: `notebooks/analisis_descriptivo_iris.ipynb`  
+Fuente: `data/Iris.csv`
 
-## Qué analiza el notebook
+Analiza exclusivamente `PetalLengthCm`, la longitud del pétalo en centímetros. Incluye:
 
-El flujo está dividido en secciones de análisis claramente separadas:
+1. Validación de 150 registros y valores faltantes.
+2. Tabla de frecuencias con ocho intervalos.
+3. Histograma, polígono de frecuencias y ojiva en figuras independientes.
+4. Medidas de tendencia central: medias, moda y mediana.
+5. Medidas de dispersión: rango, desviaciones, varianza y coeficiente de variación.
+6. Sesgo y curtosis.
+7. Cuartiles, deciles, detección de valores atípicos y diagrama de caja y bigote.
 
-1. **Validación de datos**: carga el CSV, confirma que hay 150 registros y revisa valores faltantes.
-2. **Distribución de frecuencias**: agrupa la longitud del pétalo en ocho intervalos de igual amplitud.
-3. **Visualización de la distribución**: genera histograma, polígono de frecuencias y ojiva.
-4. **Tendencia central**: calcula media aritmética, geométrica, armónica, recortada, moda y mediana.
-5. **Dispersión**: calcula rango, desviación absoluta media, varianza, desviación estándar y coeficiente de variación.
-6. **Forma**: analiza sesgo y curtosis.
-7. **Posición y atípicos**: calcula cuartiles, deciles, límites de Tukey y muestra un diagrama de caja y bigote.
+Al ejecutarlo deben aparecer 150 observaciones sin valores faltantes, longitudes entre 1.0 y 6.9 cm, ocho clases cuya frecuencia suma 150 y ningún valor atípico bajo la regla de Tukey.
 
-Cada resultado incluye interpretaciones escritas a partir de los valores calculados. No se limita a mostrar fórmulas o números aislados.
+## Notebook: análisis de causas de falla
 
-## Cómo leer los resultados
+Archivo: `notebooks/analisis_causas_falla.ipynb`  
+Fuente: `data/causas_falla_frecuencias.csv`
 
-- La **tabla de frecuencias** indica cuántos registros pertenecen a cada intervalo de longitudes.
-- El **histograma** muestra visualmente dónde se concentran las observaciones.
-- El **polígono de frecuencias** facilita observar ascensos, descensos y posibles concentraciones.
-- La **ojiva** muestra el número acumulado de observaciones hasta cada límite de clase.
-- Las medidas de **tendencia central** describen un valor representativo de la variable.
-- Las medidas de **dispersión** indican cuánto se alejan los valores entre sí y de su media.
-- El **sesgo** y la **curtosis** ayudan a describir la asimetría y concentración de la distribución.
-- El **diagrama de caja** resume los cuartiles y facilita identificar valores extremos.
+Analiza 120 incidencias agrupadas en nueve causas. Incluye:
 
-## Comprobaciones útiles
+1. Tabla de frecuencias, porcentajes y porcentajes acumulados.
+2. Diagrama de Pareto con una referencia visual al 80% acumulado.
+3. Gráfico de pastel con la participación porcentual de cada causa.
 
-Al ejecutar correctamente el notebook, deberías observar:
+El Pareto prioriza las causas de mayor impacto. Las cinco causas más frecuentes acumulan 80% de los registros, por lo que son el grupo principal para orientar acciones correctivas.
 
-- 150 observaciones y cero valores faltantes en `PetalLengthCm`.
-- Longitudes entre 1.0 y 6.9 cm.
-- Ocho clases de frecuencia cuya suma es 150.
-- Cuatro gráficas independientes: histograma, polígono de frecuencias, ojiva y diagrama de caja y bigote.
-- Ningún valor atípico según la regla de Tukey aplicada en el análisis.
+## Cómo interpretar las visualizaciones
+
+- **Histograma:** concentra los registros de Iris por intervalos de longitud.
+- **Polígono de frecuencias:** permite seguir las variaciones entre intervalos consecutivos.
+- **Ojiva:** muestra cuántas observaciones se han acumulado hasta cada límite.
+- **Caja y bigote:** resume cuartiles y ayuda a detectar extremos.
+- **Pareto:** ordena las causas desde la más frecuente hasta la menos frecuente y revela prioridades.
+- **Pastel:** comunica la proporción de cada causa dentro del total de fallas.
 
 ## Problemas frecuentes
 
 | Situación | Solución |
 |---|---|
-| `ModuleNotFoundError` para `scipy`, `pandas`, `numpy` o `matplotlib` | Ejecuta `%pip install scipy pandas numpy matplotlib`, reinicia el kernel y vuelve a ejecutar el notebook. |
-| No se encuentra `data/Iris.csv` | Abre Jupyter desde la raíz del proyecto y confirma que existe la carpeta `data/`. |
-| Las gráficas no aparecen | Ejecuta **Run All** y espera a que finalice cada celda. Si instalaste librerías, reinicia el kernel antes. |
-| El notebook sigue mostrando errores después de instalar paquetes | Cierra el notebook, detén Jupyter, vuelve a abrirlo y ejecuta **Run All**. |
-
-## Próximos análisis posibles
-
-Una vez ejecutado el flujo, el mismo proyecto puede extenderse para:
-
-- Comparar `PetalLengthCm` entre las tres especies Iris.
-- Analizar las demás mediciones físicas del dataset.
-- Estudiar correlaciones entre variables.
-- Preparar los datos para un modelo de clasificación de especies.
+| Falta `scipy`, `pandas`, `numpy` o `matplotlib` | Ejecuta `%pip install scipy pandas numpy matplotlib`, reinicia el kernel y vuelve a ejecutar. |
+| No se encuentra un CSV | Abre Jupyter desde la raíz del proyecto y confirma que la carpeta `data/` existe. |
+| No aparecen gráficas | Ejecuta **Run All** y espera a que finalice cada celda. |
+| Persisten errores después de instalar paquetes | Cierra el notebook, detén Jupyter, vuelve a abrirlo y ejecuta **Run All**. |
